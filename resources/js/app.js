@@ -5,8 +5,9 @@
  */
 
 require('./bootstrap');
-
-window.Vue = require('vue');
+import Vue from 'vue';
+import Vuex from 'vuex';
+Vue.use(Vuex);
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,8 +20,23 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vuex
+const store = new Vuex.Store({
+    state:{
+        itens:{teste:"it's working"}
+    },
+    mutations:{
+        setItens(state,obj){
+            state.itens = obj;
+        }
+    }
+});
 
+Vue.component('example', require('./components/ExampleComponent.vue').default);
+Vue.component('tabela', require('./components/Tabela.vue').default);
+Vue.component('formulario', require('./components/Formulario.vue').default);
+Vue.component('modal', require('./components/modal/Modal.vue').default);
+Vue.component('modallink', require('./components/modal/ModalLink.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -29,4 +45,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    store
 });
