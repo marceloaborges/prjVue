@@ -1,11 +1,6 @@
 <template>
     <div>
         <div class="row">
-            <div class="col-12">
-                <p>{{ this.$store.state.itens.teste }}</p>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-12 text-right">
                 <a v-if="criar" v-bind:href="criar" class="btn btn-sm btn-primary">Adicionar</a>
             </div>
@@ -26,10 +21,10 @@
                             <tr v-for="(item,index) in itens">
                                 <td v-for="i in item">{{ i }}</td>
                                 <td v-if="detalhe" class="text-center">
-                                    <modallink v-if="detalhe" v-bind:href="detalhe" nome="detalhe" titulo="detalhe" tipo="link" classe="btn btn-sm btn-info"></modallink>
+                                    <modallink v-if="detalhe" v-bind:item="item" v-bind:href="detalhe" nome="detalhe" titulo="detalhe" tipo="link" classe="btn btn-sm btn-info"></modallink>
                                 </td>
                                 <td v-if="editar" v-bind:href="editar">
-                                    <modallink v-if="editar" v-bind:href="editar" nome="editar" titulo="editar" tipo="link" classe="btn btn-sm btn-secondary"></modallink>
+                                    <modallink v-if="editar" v-bind:item="item" v-bind:href="editar" nome="editar" titulo="editar" tipo="link" classe="btn btn-sm btn-secondary"></modallink>
                                 </td>
                                 <td v-if="deletar" class="text-center">
                                     <form v-bind:id="index" v-if="deletar && token" v-bind:action="deletar" method="post">

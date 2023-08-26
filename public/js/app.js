@@ -106,7 +106,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['tipo', 'nome', 'titulo', 'classe']
+  props: ['tipo', 'nome', 'titulo', 'classe', 'item'],
+  methods: {
+    carregaForm: function carregaForm() {
+      this.$store.commit('setItem', this.item);
+    }
+  }
 });
 
 /***/ }),
@@ -198,10 +203,6 @@ var render = function render() {
   return _c("div", [_c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-12"
-  }, [_c("p", [_vm._v(_vm._s(this.$store.state.itens.teste))])])]), _vm._v(" "), _c("div", {
-    staticClass: "row"
-  }, [_c("div", {
     staticClass: "col-12 text-right"
   }, [_vm.criar ? _c("a", {
     staticClass: "btn btn-sm btn-primary",
@@ -240,6 +241,7 @@ var render = function render() {
       staticClass: "text-center"
     }, [_vm.detalhe ? _c("modallink", {
       attrs: {
+        item: item,
         href: _vm.detalhe,
         nome: "detalhe",
         titulo: "detalhe",
@@ -252,6 +254,7 @@ var render = function render() {
       }
     }, [_vm.editar ? _c("modallink", {
       attrs: {
+        item: item,
         href: _vm.editar,
         nome: "editar",
         titulo: "editar",
@@ -373,21 +376,55 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm.tipo == "button" ? _c("button", {
+  return _vm.item ? _c("span", [_vm.tipo == "button" ? _c("button", {
     "class": _vm.classe || "btn btn-primary",
     attrs: {
       type: "button",
       "data-toggle": "modal",
       "data-target": "#" + _vm.nome
+    },
+    on: {
+      click: function click($event) {
+        return _vm.carregaForm();
+      }
     }
-  }, [_vm._v("\n    " + _vm._s(_vm.titulo) + "\n")]) : _vm.tipo == "link" ? _c("a", {
+  }, [_vm._v("\n        " + _vm._s(_vm.titulo) + "\n    ")]) : _vm.tipo == "link" ? _c("a", {
     "class": _vm.classe || "",
     attrs: {
       href: "#",
       "data-toggle": "modal",
       "data-target": "#" + _vm.nome
+    },
+    on: {
+      click: function click($event) {
+        return _vm.carregaForm();
+      }
     }
-  }, [_vm._v("\n    " + _vm._s(_vm.titulo) + "\n")]) : _vm._e();
+  }, [_vm._v(_vm._s(_vm.titulo))]) : _vm._e()]) : !_vm.item ? _c("span", [_vm.tipo == "button" ? _c("button", {
+    "class": _vm.classe || "btn btn-primary",
+    attrs: {
+      type: "button",
+      "data-toggle": "modal",
+      "data-target": "#" + _vm.nome
+    },
+    on: {
+      click: function click($event) {
+        return _vm.carregaForm();
+      }
+    }
+  }, [_vm._v("\n        " + _vm._s(_vm.titulo) + "\n    ")]) : _vm.tipo == "link" ? _c("a", {
+    "class": _vm.classe || "",
+    attrs: {
+      href: "#",
+      "data-toggle": "modal",
+      "data-target": "#" + _vm.nome
+    },
+    on: {
+      click: function click($event) {
+        return _vm.carregaForm();
+      }
+    }
+  }, [_vm._v(_vm._s(_vm.titulo))]) : _vm._e()]) : _vm._e();
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -430,13 +467,11 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_0_
 // Vuex
 var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
   state: {
-    itens: {
-      teste: "it's working"
-    }
+    item: {}
   },
   mutations: {
-    setItens: function setItens(state, obj) {
-      state.itens = obj;
+    setItem: function setItem(state, obj) {
+      state.item = obj;
     }
   }
 });
