@@ -21,7 +21,7 @@
                             <tr v-for="(item,index) in itens">
                                 <td v-for="i in item">{{ i }}</td>
                                 <td v-if="detalhe" class="text-center">
-                                    <modallink v-if="detalhe" v-bind:item="item" v-bind:href="detalhe" nome="detalhe" titulo="detalhe" tipo="link" classe="btn btn-sm btn-info"></modallink>
+                                    <modallink v-if="detalhe" v-bind:item="item" v:bind:url="detalhe" v-bind:href="detalhe" nome="detalhe" titulo="detalhe" tipo="link" classe="btn btn-sm btn-info"></modallink>
                                 </td>
                                 <td v-if="editar" v-bind:href="editar">
                                     <modallink v-if="editar" v-bind:item="item" v-bind:href="editar" nome="editar" titulo="editar" tipo="link" classe="btn btn-sm btn-secondary"></modallink>

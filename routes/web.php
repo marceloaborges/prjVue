@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth','web']], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
     Route::resource('artigos', 'ArtigoController');
 
@@ -9,3 +9,4 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 Auth::routes(['register' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');

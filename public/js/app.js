@@ -106,9 +106,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['tipo', 'nome', 'titulo', 'classe', 'item'],
+  props: ['tipo', 'nome', 'titulo', 'classe', 'item', 'url'],
   methods: {
     carregaForm: function carregaForm() {
+      var _this = this;
+      axios.get(this.url + this.item.id).then(function (res) {
+        console.log(res.data);
+        _this.$store.commit('setItem', res.data);
+      });
       this.$store.commit('setItem', this.item);
     }
   }
@@ -242,6 +247,7 @@ var render = function render() {
     }, [_vm.detalhe ? _c("modallink", {
       attrs: {
         item: item,
+        "v:bind:url": "detalhe",
         href: _vm.detalhe,
         nome: "detalhe",
         titulo: "detalhe",

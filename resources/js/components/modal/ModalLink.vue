@@ -18,9 +18,13 @@
 
 <script>
     export default {
-        props:['tipo','nome','titulo','classe','item'],
+        props:['tipo','nome','titulo','classe','item','url'],
         methods:{
             carregaForm:function(){
+                axios.get(this.url + this.item.id).then(res => {
+                    console.log(res.data);
+                    this.$store.commit('setItem',res.data);
+                });
                 this.$store.commit('setItem',this.item);
             }
         }
