@@ -494,6 +494,9 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('modallink', (__webpack_re
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_1__["default"]({
   el: '#app',
+  data: {
+    frase: 'Hello World, hahahaha !!!!'
+  },
   store: store
 });
 

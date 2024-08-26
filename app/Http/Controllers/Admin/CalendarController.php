@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Artigo;
-use App\Http\Requests\ArtigoRequest;
+use App\Models\Client;
+use App\Models\Contact;
+use App\Models\User;
 
-class ArtigoController extends Controller
+class CalendarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +17,21 @@ class ArtigoController extends Controller
      */
     public function index()
     {
-        $artigos = json_encode(Artigo::select('id','data','titulo','descricao')->get());
-        return view('admin.artigo.index', compact('artigos'));
+        $events = [];
+        
+        $contacts = Contact::with(['client','user'])->get();
+
+        dd($contacts);
+        
+        foreach ($contacts as $contact) {
+            $events[] = [
+                'title' => $contact->client->rz . ' ('.$contact->user->name.')',
+                'start' => $contact->start,
+                'end' => $contact->end,
+            ];
+        }
+        
+        return view('calendar.index', compact('events'));
     }
 
     /**
@@ -36,11 +50,9 @@ class ArtigoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ArtigoRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->all();
-        $insert = Artigo::create($data);
-        return redirect()->back();
+        //
     }
 
     /**
@@ -51,7 +63,7 @@ class ArtigoController extends Controller
      */
     public function show($id)
     {
-        return Artigo::find($id);
+        //
     }
 
     /**

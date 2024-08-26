@@ -45,5 +45,8 @@ Vue.component('modallink', require('./components/modal/ModalLink.vue').default);
 
 const app = new Vue({
     el: '#app',
+    data:{
+        frase:'Hello World, hahahaha !!!!',
+    },
     store
 });
